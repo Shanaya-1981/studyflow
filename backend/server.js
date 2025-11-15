@@ -1,8 +1,8 @@
-import express from 'express';
-import { MongoClient } from 'mongodb';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import express from "express";
+import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -23,10 +23,10 @@ const client = new MongoClient(process.env.MONGO_URI);
 async function connectDB() {
   try {
     await client.connect();
-    db = client.db('studyflow');
-    console.log('✅ MongoDB connected');
+    db = client.db("studyflow");
+    console.log("✅ MongoDB connected");
   } catch (err) {
-    console.error('❌ MongoDB error:', err);
+    console.error("❌ MongoDB error:", err);
   }
 }
 
@@ -35,26 +35,26 @@ connectDB();
 export { db };
 
 // Import routes
-import planRoutes from './routes/plans.js';
-import dailyPlanRoutes from './routes/dailyPlans.js';
-import progressRoutes from './routes/progress.js';
+import planRoutes from "./routes/plans.js";
+import dailyPlanRoutes from "./routes/dailyPlans.js";
+import progressRoutes from "./routes/progress.js";
 
 // API routes (these come FIRST)
-app.use('/api/plans', planRoutes);
-app.use('/api/daily-plans', dailyPlanRoutes);
-app.use('/api/progress', progressRoutes);
+app.use("/api/plans", planRoutes);
+app.use("/api/daily-plans", dailyPlanRoutes);
+app.use("/api/progress", progressRoutes);
 
 // Health check route (optional, for testing)
-app.get('/api/health', (req, res) => {
-  res.json({ message: 'API running!' });
+app.get("/api/health", (req, res) => {
+  res.json({ message: "API running!" });
 });
 
 // Serve React static files (AFTER API routes)
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 // Catch-all: Send index.html for any route not matched above
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
 // Start server
