@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google/generative-ai": "^0.24.1"
+    "express": "^5.0.1",
+    "mongodb": "^6.11.0",
+    "dotenv": "^16.4.7",
+    "nodemon": "^3.1.10"
   }
 }
