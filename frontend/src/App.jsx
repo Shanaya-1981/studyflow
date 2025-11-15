@@ -4,7 +4,7 @@ import DailyPlanView from "./components/DailyPlanView.jsx";
 import StreakCounter from "./components/StreakCounter.jsx";
 import HourlyTaskList from "./components/HourlyTaskList.jsx";
 import EncouragementMessage from "./components/EncouragementMessage.jsx";
-import "./App.css";
+import './app.css';  
 
 function App() {
   const [userName] = useState("Alice");
