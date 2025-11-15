@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 function EncouragementMessage({ streak }) {
   if (streak > 0) return null;
@@ -12,7 +12,7 @@ function EncouragementMessage({ streak }) {
         <li>Use your commute (bus/train) to review flashcards</li>
         <li>Even 30 minutes counts - you don't need the full 2 hours</li>
       </ul>
-      <p style={{marginTop: '15px', fontWeight: '600'}}>
+      <p style={{ marginTop: "15px", fontWeight: "600" }}>
         Ready to restart your streak? You've got this! 💪
       </p>
     </div>
@@ -20,7 +20,7 @@ function EncouragementMessage({ streak }) {
 }
 
 EncouragementMessage.propTypes = {
-  streak: PropTypes.number.isRequired
+  streak: PropTypes.number.isRequired,
 };
 
 export default EncouragementMessage;

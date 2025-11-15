@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState } from "react";
+import PropTypes from "prop-types";
 
 function HourlyTaskList({ tasks, planId, onAllComplete }) {
   const [localTasks, setLocalTasks] = useState(tasks || []);
@@ -8,28 +8,29 @@ function HourlyTaskList({ tasks, planId, onAllComplete }) {
   const celebrations = [
     "🎉 Awesome! You're crushing it!",
     "💪 Amazing work! Keep that momentum going!",
-    "⭐ Fantastic! One step closer to mastery!"
+    "⭐ Fantastic! One step closer to mastery!",
   ];
 
   const handleCheckbox = async (index) => {
     const newTasks = [...localTasks];
     newTasks[index].completed = !newTasks[index].completed;
     setLocalTasks(newTasks);
-    
+
     if (newTasks[index].completed) {
-      const randomMsg = celebrations[Math.floor(Math.random() * celebrations.length)];
+      const randomMsg =
+        celebrations[Math.floor(Math.random() * celebrations.length)];
       setShowCelebration(randomMsg);
       setTimeout(() => setShowCelebration(false), 3000);
     }
-    
+
     // Check if all tasks complete
-    const allDone = newTasks.every(task => task.completed);
+    const allDone = newTasks.every((task) => task.completed);
     if (allDone && onAllComplete) {
       // Update plan status to completed
       await fetch(`/api/plans/${planId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: 'completed' })
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "completed" }),
       });
       onAllComplete();
     }
@@ -45,33 +46,32 @@ function HourlyTaskList({ tasks, planId, onAllComplete }) {
       {localTasks.map((task, index) => (
         <div key={index} className="task-item">
           <label>
-            <input 
+            <input
               className="task-checkbox"
               type="checkbox"
               checked={task.completed || false}
               onChange={() => handleCheckbox(index)}
             />
-            <strong>{task.time_slot}: {task.title}</strong>
+            <strong>
+              {task.time_slot}: {task.title}
+            </strong>
           </label>
           <p>{task.instructions}</p>
-          {task.resources && task.resources.map((res, i) => (
-            <a 
-              key={i} 
-              href={res.url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              📎 {res.title}
-            </a>
-          ))}
+          {task.resources &&
+            task.resources.map((res, i) => (
+              <a
+                key={i}
+                href={res.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                📎 {res.title}
+              </a>
+            ))}
         </div>
       ))}
-      
-      {showCelebration && (
-        <div className="celebration">
-          {showCelebration}
-        </div>
-      )}
+
+      {showCelebration && <div className="celebration">{showCelebration}</div>}
     </div>
   );
 }
@@ -79,7 +79,7 @@ function HourlyTaskList({ tasks, planId, onAllComplete }) {
 HourlyTaskList.propTypes = {
   tasks: PropTypes.array,
   planId: PropTypes.string.isRequired,
-  onAllComplete: PropTypes.func
+  onAllComplete: PropTypes.func,
 };
 
 export default HourlyTaskList;

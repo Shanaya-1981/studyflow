@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 function StreakCounter({ userName, onStreakLoaded }) {
   const [streak, setStreak] = useState(0);
@@ -9,13 +9,13 @@ function StreakCounter({ userName, onStreakLoaded }) {
       const response = await fetch(`/api/progress/streak/${userName}`);
       const data = await response.json();
       setStreak(data.streak);
-      
+
       // ADD THIS PART - Pass streak to parent
       if (onStreakLoaded) {
         onStreakLoaded(data.streak);
       }
     }
-    
+
     fetchStreak();
   }, [userName, onStreakLoaded]);
 
@@ -29,7 +29,7 @@ function StreakCounter({ userName, onStreakLoaded }) {
 
 StreakCounter.propTypes = {
   userName: PropTypes.string.isRequired,
-  onStreakLoaded: PropTypes.func
+  onStreakLoaded: PropTypes.func,
 };
 
 export default StreakCounter;
